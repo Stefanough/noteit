@@ -3,12 +3,14 @@ import NoteDisplay from "./NoteDisplay.jsx";
 
 const NoteComponent = props => {
   const notelist = [];
-  props.list.map((note, idx) => {
+  props.noteList.map((note, idx) => {
     notelist.push(
       <NoteDisplay
         // img = {props.img}
-        edit={props.editNote}
-        delete={props.deleteNote}
+        note = {props.note}
+        editNote={props.editNote}
+        noteList = {props.noteList}
+        deleteNote={props.deleteNote}
         key={idx}
       />
     );

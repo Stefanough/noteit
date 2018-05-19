@@ -1,6 +1,7 @@
 import React, { PropTypes } from "react";
 
 const Sign = props => {
+  let submit;
   let text = 'Log in:';
   if (props.label === "sign") {
     text = 'Sign up:';

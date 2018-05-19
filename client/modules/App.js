@@ -18,14 +18,14 @@ const defaultState = Immutable.fromJS({
   //   }},
 });
 
-export function deleteNote(url) {
-  fetch(, {
-    method = "DELETE"
-  }).then(response => {
-    return response.json()
-  }).then((jsonRes) => {
-    //use the jsonRes.username and remove the element from the noteList
-  })
+// export function deleteNote(url) {
+//   fetch(, {
+//     method = "DELETE"
+//   }).then(response => {
+//     return response.json()
+//   }).then((jsonRes) => {
+//     //use the jsonRes.username and remove the element from the noteList
+//   })
   
 export function createUser(event) {
   event.preventDefault();

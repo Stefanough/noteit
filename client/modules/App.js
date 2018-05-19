@@ -2,6 +2,7 @@ import Immutable from "immutable";
 import axios from "axios";
 
 export const CREATE_USER = 'CREATE_USER';
+export const VERIFY_USER = 'VERIFY_USER';
 export const ADD_NOTE = "ADD_NOTE";
 export const DELETE_NOTE = "DELETE_NOTE";
 export const EDIT_NOTE = "EDIT_NOTE";
@@ -11,7 +12,8 @@ const defaultState = Immutable.fromJS({
   value1: "value",
   loggedIn: false,
   username: "",
-  noteList: []
+  noteList: [],
+  // clickedNode: nodethatwewant
   //   noteList: { 'www.wikipedia.com': {
   //       img: 'https://upload.wikimedia.org/wikipedia/commons/5/5f/Note.svg',
 
@@ -42,7 +44,8 @@ export function deleteNote(note_id) {
 };
 };
 
-export function createUser(event) {
+export function createUser(event, cb) {
+  let load;
   event.preventDefault();
   return dispatch => {
     axios
@@ -51,11 +54,42 @@ export function createUser(event) {
         password: event.target.password.value,
       })
       .then(res => {
-        console.log("res", res);
-        return dispatch({
-          type: ADD_USER,
-          payload: res // expecting boolean
+        console.log('res:',res);
+        if (res) {
+          load = true
+          cb();
+        } else load = false;
+        // console.log('load:',load);
+        dispatch({
+          type: CREATE_USER,
+          payload: load // expecting boolean
         });
+        // return cb();
+      });
+  };
+}
+
+export function verifyUser(event, cb) {
+  let load;
+  event.preventDefault();
+  return dispatch => {
+    axios
+      .post("login", {
+        name: event.target.username.value,
+        password: event.target.password.value,
+      })
+      .then(res => {
+        // console.log('res:', res);
+        if (res.data === true) {
+          load = true
+          cb();
+        } else load = false;
+        // console.log('load:',load);
+        dispatch({
+          type: VERIFY_USER,
+          payload: load // expecting boolean
+        });
+        // return cb();
       });
   };
 }
@@ -127,6 +161,7 @@ export const actions = {
 const ACTION_HANDLERS = {
   [ADD_NOTE]: (state, action) => state.set("noteList", action.payload),
   [CREATE_USER]: (state, action) => state.set("loggedIn", action.payload),
+  [VERIFY_USER]: (state, action) => state.set('loggedIn', action.payload),
   [DELETE_NOTE]: (state, action) => state.set("value1", action.payload),
   [EDIT_NOTE]: (state, action) => state.set("value1", action.payload)
 };

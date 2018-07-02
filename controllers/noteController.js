@@ -52,7 +52,7 @@ const noteController = {
         res.json(results.rows);
       }
       client.end();
-    })
+    });
   },
 
   getNoteByID(req, res) {
@@ -64,6 +64,7 @@ const noteController = {
       } else {
         res.sed(results);
       }
+      client.end();
     });
   },
 
@@ -78,6 +79,7 @@ const noteController = {
       } else {
         res.send(results);
       }
+      client.end();
     });
   },
 
@@ -89,6 +91,7 @@ const noteController = {
       } else {
         res.send(results);
       }
+      client.end();
     });
   },
 

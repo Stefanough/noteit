@@ -23,6 +23,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
 // User routing
 app.post('/signup', userController.createUser, userController.checkUser);
 app.post('/login', userController.verifyUser);
@@ -45,5 +46,10 @@ app.post('/notes/create', noteController.createNote);
 
 // delete a note
 app.delete('/notes/delete', noteController.deleteNote);
+
+// Routing
+// app.get('/', (req, res, next) => {
+//   res.redirect('/home', )
+// });
 
 app.use(express.static(path.join(__dirname, 'build')));

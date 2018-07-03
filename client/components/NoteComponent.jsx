@@ -17,7 +17,7 @@ const NoteComponent = props => {
   });
   return(
       <div id= "noteDisplay">
-        <h4> Previous NOte </h4>
+        <h4> Previous Note </h4>
         {notelist}
       </div>
   )

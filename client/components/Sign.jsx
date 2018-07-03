@@ -2,6 +2,7 @@ import React, { PropTypes } from "react";
 import { withRouter } from 'react-router-dom';
 
 const Sign = props => {
+
   // console.log('props: ', props);
   let submit = props.verifyUser;
   let text = 'Log in:';
@@ -10,6 +11,7 @@ const Sign = props => {
     submit = props.createUser;
   };
   const cb = () => props.history.push('note');
+
   return (
     <div id="log">
       <form class="user-form" onSubmit={(e) => submit(e, cb)}>

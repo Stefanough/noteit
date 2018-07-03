@@ -38,7 +38,7 @@ class Login extends React.Component {
     });
     return (
       <div id="login-page">
-        <Redirect />
+      <Redirect />
         <img
           class="background-image"
           src="http://fondosmovil.net/images/img8/fondos-de-navidad-de-hello-kitty-para-fondo-de-pantalla-en-hd-1.gif"

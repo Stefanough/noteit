@@ -28,23 +28,24 @@ class Home extends React.Component {
   render() {
     return (
       <div id="home">
-        <NoteComponent noteList = {props.noteList} deleteNote = {props.deleteNote} editNote={props.editNote} />
-        <NoteCreate noteList = {props.noteList} addNote = {props.addNote} />
+        <Noteit editNote={props.editNote} />
+        <NoteComponent noteList={props.noteList} deleteNote={props.deleteNote} editNote={props.editNote} />
+        <NoteCreate noteList={props.noteList} addNote={props.addNote} />
       </div>
     );
   }
-//   EnterPrev(e) {
-//     e.preventDefault();
-//     const newNote = {
-//       id: Date.now(),
-//       iframe: "something"
-//     };
-//     this.state(prevState => {
-//       {
-//         prevNoteList: prevState.prevNoteList.push(newNote);
-//       }
-//     });
-//   }
+  //   EnterPrev(e) {
+  //     e.preventDefault();
+  //     const newNote = {
+  //       id: Date.now(),
+  //       iframe: "something"
+  //     };
+  //     this.state(prevState => {
+  //       {
+  //         prevNoteList: prevState.prevNoteList.push(newNote);
+  //       }
+  //     });
+  //   }
 }
 
 export default connect(mapStateToProps, mapActionCreators)(Home);

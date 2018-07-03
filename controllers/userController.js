@@ -21,12 +21,28 @@ client.connect(function (err) {
 
 const userController = {
 
-  createUser: (req, res, next) => {
-    // console.log(req.body);
+    verifyUsername: (req, res, next) => {
 
-    if (req.body.name && req.body.password) {
-
-
+        if (req.body.name && req.body.password) {
+            client.query(`SELECT password FROM users WHERE (name = '${req.body.name}');`, (err, results) => {
+                console.log("checkUser log: ", results.rowCount);
+                if(results.rowCount > 0) {
+                    return res.send("This username already exists.");
+ 
+                }
+                else{
+                    next();
+                }
+            })
+        }
+        else {
+            return res.send("The username or password can't be empty");
+          }
+    },
+    
+    
+    createUser: (req, res) => {
+  
       let { name, password } = req.body;
       //let password = req.body.password;
 
@@ -52,18 +68,14 @@ const userController = {
         client.query(q, (err, results) => {
           console.log('query');
           if (err) console.log(err);
-          else console.log(results);
+          else return res.send(true)
         });
-        next();
       }).catch(err => {
         console.log("err promise: ", err);
 
       })
-    }
-    else {
-      res.redirect(400, '/signup');
-      // res.end();
-    }
+    
+    
 
     // client.end();
     // });
@@ -99,7 +111,7 @@ const userController = {
         if (err) reject();
         if (results.rows[0] === undefined) {
           console.log("result: ", results);
-          res.redirect(400, '/login');
+          return res.send(false);
         }
         else {
           password = results.rows[0].password;
@@ -119,9 +131,9 @@ const userController = {
         if (err) {
           console.log("compare error: ", err);
         } else if (isMatch) {
-          res.send(true);
+          return res.send(true);
         } else if (!isMatch) {
-          res.send(false);
+          return res.send(false);
         }
       });
     }).catch(err => {
